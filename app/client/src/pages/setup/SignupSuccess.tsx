@@ -5,6 +5,7 @@ import {
   extractAppIdAndPageIdFromUrl,
   SIGNUP_SUCCESS_URL,
 } from "constants/routes";
+import { CLOUD_BASE_HOST_NAMES } from "constants/ThirdPartyConstants";
 import { requiresAuth } from "pages/UserAuth/requiresAuthHOC";
 import React from "react";
 import { useCallback } from "react";
@@ -66,9 +67,17 @@ export function SignupSuccess() {
   }, []);
 
   const user = useSelector(getCurrentUser);
+  let isAppsmithCloudInstance = false;
+
+  if (urlObject?.hostname) {
+    isAppsmithCloudInstance = !!CLOUD_BASE_HOST_NAMES.find(
+      (baseHostName) => urlObject?.hostname.indexOf(baseHostName) > -1,
+    );
+  }
 
   /*
    *  Proceed with redirection,
+   *    For all local deployments
    *    For a super user, since we already collected role and useCase during signup
    *    For a normal user, who has filled in their role and useCase and try to visit signup-success url by entering manually.
    *    For an invited user, we don't want to collect the data. we just want to redirect to the org they have been invited to.
@@ -76,6 +85,7 @@ export function SignupSuccess() {
    */
   //TODO(Balaji): Factor in case, where user had closed the tab, while filling the form.And logs back in again.
   if (
+    !isAppsmithCloudInstance ||
     user?.isSuperUser ||
     (user?.role && user?.useCase) ||
     shouldEnableFirstTimeUserOnboarding !== "true"
