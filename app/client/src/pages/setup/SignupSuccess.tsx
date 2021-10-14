@@ -68,7 +68,7 @@ export function SignupSuccess() {
   }, []);
 
   const user = useSelector(getCurrentUser);
-  const { isAppsmithCloud } = getAppsmithConfigs();
+  const { cloudHosting } = getAppsmithConfigs();
 
   // if (urlObject?.hostname) {
   //   isAppsmithCloudInstance = !!CLOUD_BASE_HOST_NAMES.find(
@@ -86,7 +86,7 @@ export function SignupSuccess() {
    */
   //TODO(Balaji): Factor in case, where user had closed the tab, while filling the form.And logs back in again.
   if (
-    !isAppsmithCloud ||
+    !cloudHosting ||
     user?.isSuperUser ||
     (user?.role && user?.useCase) ||
     shouldEnableFirstTimeUserOnboarding !== "true"
