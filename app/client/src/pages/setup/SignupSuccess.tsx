@@ -6,7 +6,6 @@ import {
   extractAppIdAndPageIdFromUrl,
   SIGNUP_SUCCESS_URL,
 } from "constants/routes";
-// import { CLOUD_BASE_HOST_NAMES } from "constants/ThirdPartyConstants";
 import { requiresAuth } from "pages/UserAuth/requiresAuthHOC";
 import React from "react";
 import { useCallback } from "react";
@@ -69,12 +68,6 @@ export function SignupSuccess() {
 
   const user = useSelector(getCurrentUser);
   const { cloudHosting } = getAppsmithConfigs();
-
-  // if (urlObject?.hostname) {
-  //   isAppsmithCloudInstance = !!CLOUD_BASE_HOST_NAMES.find(
-  //     (baseHostName) => urlObject?.hostname.indexOf(baseHostName) > -1,
-  //   );
-  // }
 
   /*
    *  Proceed with redirection,
