@@ -357,6 +357,14 @@ class AnalyticsUtil {
     windowDoc.analytics && windowDoc.analytics.reset();
     windowDoc.mixpanel && windowDoc.mixpanel.reset();
   }
+
+    firstName: 'Sven',
+  lastName: 'Svensson',
+  currentInsurer: '',
+  birthDate: '1995-09-29',
+  ssn: '199509291234',
+  startDate: '',
+  email: 'sven.svensson@hedvig.com',
 }
 
 export default AnalyticsUtil;
